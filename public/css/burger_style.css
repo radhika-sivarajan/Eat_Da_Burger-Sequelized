@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "cherry";
+    src: url(cherry.ttf) format("truetype");
+}
+
+body {
+    background: #f3feff url(../img/bg-3.jpg) no-repeat;
+    background-size: cover;
+}
+
+.title h1 {
+    font-family: "cherry", sans-serif;
+    font-size: 500%;
+    color: #daa520;
+    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.add-burger {
+    margin-top: 50px;
+}
+
+.burger-img {
+    width: 150px;
+}
+
+tr td:nth-child(1),
+tr td:nth-child(2) {
+    font-family: 'Krona One', sans-serif;
+    color: #dff0d8;
+    text-shadow: rgb(3, 3, 3) 0px 0px 7px;
+    text-transform: capitalize;
+}
+
+.burger-list {
+    background-image: url(../img/burger-list.jpg);
+    background-size: cover;
+    padding: 20px;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 10px;
+    -moz-border-image: url(../img/frame-border.png) 28 28 28 28 repeat;
+    -webkit-border-image: url(../img/frame-border.png) 28 28 28 28 repeat;
+    -o-border-image: url(../img/frame-border.png) 28 28 28 28 repeat;
+    border-image: url(../img/frame-border.png) 28 28 28 28 fill repeat;
+}
+
+.burger-list h4 {
+    font-family: 'Lilita One', cursive;
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 0 1px 1px #ffffff, 0 2px 0 #999, 0 3px 0 #555, 0 7px 5px #333;
+}
+
+footer {
+    color: #eee;
+}

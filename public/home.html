@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Krona+One|Lilita+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/burger_style.css" type="text/css" />
+
+    <title>Eat Da Burger</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row title text-center">
+            <!-- Header of the webpage -->
+            <div class="col-lg-8">
+                <h1>Eat Da Burger</h1>
+            </div>
+            <!--Add new burger-->
+            <div class="col-lg-4 add-burger">
+                <form class="form-inline create-form" action="/" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="burger-name" name="burgerName" placeholder="Burger name">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add burger</button>
+                </form>
+            </div>
+        </div>
+
+        <!--Burger list-->
+        <div class="row burger-list">
+            <div class="col-lg-4 col-lg-offset-1">
+                <h4>Burgers list</h4>
+                <div>
+                    <table class="table table-hover">
+                        <tr>
+                            <td>id</td>
+                            <td>name</td>
+                            <td>
+                                <form action="/{{this.id}}?_method=PUT" method="POST">
+                                    <input type="hidden" name="devoured" value='1'>
+                                    <button type="submit" class="btn btn-xs btn-danger">Devour it !</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-2 hidden-md hidden-sm hidden-xs text-center">
+                <img class="burger-img" src="img/burger-stack.png">
+            </div>
+            <div class="col-lg-4">
+                <h4>Burgers Devoured</h4>
+                <div>
+                    <table class="table table-hover">
+                        <tr>
+                            <td>id</td>
+                            <td>name</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="row text-center ">
+            <p>Copyright &copy; 2017 Radhika Sivarajan</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/burger_js.js"></script>
+</body>
+
+</html>

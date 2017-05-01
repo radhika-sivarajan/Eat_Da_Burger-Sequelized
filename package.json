@@ -1,0 +1,25 @@
+{
+  "name": "eat-da-burger-sequelized",
+  "version": "1.0.0",
+  "description": "Burger logger",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radhika-sivarajan/Eat_Da_Burger-Sequelized.git"
+  },
+  "author": "radhika-sivarajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radhika-sivarajan/Eat_Da_Burger-Sequelized/issues"
+  },
+  "homepage": "https://github.com/radhika-sivarajan/Eat_Da_Burger-Sequelized#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.4"
+  }
+}
