@@ -22,7 +22,7 @@
             </div>
             <!--Add new burger-->
             <div class="col-lg-4 add-burger">
-                <form class="form-inline create-form" action="/" method="POST">
+                <form id="add-burger">
                     <div class="form-group">
                         <input type="text" class="form-control" id="burger-name" name="burgerName" placeholder="Burger name">
                     </div>
@@ -36,17 +36,7 @@
             <div class="col-lg-4 col-lg-offset-1">
                 <h4>Burgers list</h4>
                 <div>
-                    <table class="table table-hover">
-                        <tr>
-                            <td>id</td>
-                            <td>name</td>
-                            <td>
-                                <form action="/{{this.id}}?_method=PUT" method="POST">
-                                    <input type="hidden" name="devoured" value='1'>
-                                    <button type="submit" class="btn btn-xs btn-danger">Devour it !</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <table class="table table-hover burger-to-eat">
                     </table>
                 </div>
             </div>
@@ -56,11 +46,7 @@
             <div class="col-lg-4">
                 <h4>Burgers Devoured</h4>
                 <div>
-                    <table class="table table-hover">
-                        <tr>
-                            <td>id</td>
-                            <td>name</td>
-                        </tr>
+                    <table class="table table-hover burger-devoured">
                     </table>
                 </div>
             </div>
