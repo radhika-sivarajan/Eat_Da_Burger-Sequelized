@@ -9,7 +9,7 @@ $(document).ready(function() {
                 var burgerToAdd = [];
                 for (var i = 0; i < burgersList.length; i++) {
                     if (!burgersList[i].devoured) {
-                        burgerToAdd.push(createNewRowBurgerToDevour(burgersList[i]));
+                        burgerToAdd.push(burgerToDevourRow(burgersList[i]));
                     }
                 }
                 $(".burger-to-eat").append(burgerToAdd);
@@ -26,14 +26,14 @@ $(document).ready(function() {
                 $(".burger-devoured").empty();
                 var burgerDevoured = [];
                 for (var i = 0; i < burgersList.length; i++) {
-                    burgerDevoured.push(createNewRowBurgerDevoured(burgersList[i]));
+                    burgerDevoured.push(burgerDevouredRow(burgersList[i]));
                 }
                 $(".burger-devoured").append(burgerDevoured);
             }
         });
     }
 
-    function createNewRowBurgerToDevour(burger) {
+    function burgerToDevourRow(burger) {
         var newTableRow = $("<tr>");
         newTableRow.attr("burger-id", burger.id);
         var burgerId = $("<td>");
@@ -52,14 +52,14 @@ $(document).ready(function() {
         return newTableRow;
     }
 
-    function createNewRowBurgerDevoured(burger) {
+    function burgerDevouredRow(burger) {
         var newTableRow = $("<tr>");
         newTableRow.attr("burger-id", burger.id);
         var burgerId = $("<td>");
         burgerId.text(burger.id);
         var burgerName = $("<td>");
         burgerName.text(burger.burgerName);
-        var customerName = $("<td>");
+        var customerName = $("<td class='customer-name'>");
         customerName.text("(Eaten by " + burger.Customer.customerName + ".)");
         newTableRow.append(burgerId).append(burgerName).append(customerName);
         return newTableRow;

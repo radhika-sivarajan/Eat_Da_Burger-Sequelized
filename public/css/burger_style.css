@@ -26,9 +26,15 @@ body {
 tr td:nth-child(1),
 tr td:nth-child(2) {
     font-family: 'Krona One', sans-serif;
+    text-transform: capitalize;
     color: #dff0d8;
     text-shadow: rgb(3, 3, 3) 0px 0px 7px;
-    text-transform: capitalize;
+}
+
+.customer-name {
+    color: black;
+    font-style: oblique;
+    text-shadow: white 0px 0px 7px;
 }
 
 .burger-list {
