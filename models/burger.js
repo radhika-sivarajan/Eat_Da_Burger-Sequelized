@@ -8,6 +8,17 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             defaultValue: 0
         }
+    }, {
+        classMethods: {
+            associate: function(models) {
+                Burgers.belongsTo(models.Customers, {
+                    onDelete: "cascade",
+                    foreignKey: {
+                        allowNull: false
+                    }
+                });
+            }
+        }
     });
     return Burgers;
 };
