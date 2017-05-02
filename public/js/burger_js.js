@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    function getBurgers() {
-        $.get("/burgerList", function(data) {
+    function getBurgersToDevour() {
+        $.get("/burgerToDevour", function(data) {
             burgersList = data;
             if (!burgersList || !burgersList.length) {
-                $(".burger-to-eat").html("<tr><td>No records... 😦</td></tr>");
+                $(".burger-to-eat").html("<tr><td>No records...</td></tr>");
             } else {
                 $(".burger-to-eat").empty();
                 var burgerToAdd = [];
@@ -17,11 +17,11 @@ $(document).ready(function() {
         });
     }
 
-    function getDevourBurgers() {
-        $.get("/burgerDevourList", function(data) {
+    function getDevouredBurgers() {
+        $.get("/burgerDevoured", function(data) {
             burgersList = data;
             if (!burgersList || !burgersList.length) {
-                $(".burger-devoured").html("<tr><td>No records... 😦</td></tr>");
+                $(".burger-devoured").html("<tr><td>No records...</td></tr>");
             } else {
                 $(".burger-devoured").empty();
                 var burgerDevoured = [];
@@ -42,7 +42,8 @@ $(document).ready(function() {
         burgerName.text(burger.burgerName);
         var customerColumn = $("<td>");
         var customerName = $("<input type='text' id='customer-name'>");
-        customerColumn.append(customerName);
+        var validator = $("<br><small class='form-text text-muted text-right warning'>");
+        customerColumn.append(customerName).append(validator);
         var buttonColumn = $("<td>");
         var devourBtn = $("<button>");
         devourBtn.text("Devour it !");
@@ -67,12 +68,16 @@ $(document).ready(function() {
 
     function addBurgerForm(event) {
         event.preventDefault();
-        var newBurger = {
-            burgerName: $("#burger-name").val().trim(),
-            devoured: 0
-        };
-        submitPost(newBurger);
-        $('#add-burger')[0].reset();
+        var burger = $("#burger-name").val().trim();
+        if (burger == "") {
+            $("#add-burger").next().text("This field is required");
+        } else {
+            var newBurger = {
+                burgerName: burger
+            };
+            submitPost(newBurger);
+            $('#add-burger')[0].reset();
+        }
     }
 
     function submitPost(newBurger) {
@@ -82,32 +87,41 @@ $(document).ready(function() {
     }
 
     function burgerDevour() {
-        var customerName = {
-            customerName: $(this).parent().prev().children().val().trim()
-        };
-        var currentBurgerId = $(this).parent().parent().attr("burger-id");
-        addCustomer(customerName, currentBurgerId);
+        var customer = $(this).parent().prev().children().val().trim();
+        if (customer == "") {
+            $(this).parent().prev().children().next().next().text("Customer name is required");
+        } else {
+            var customerName = {
+                customerName: customer
+            };
+            var currentBurgerId = $(this).parent().parent().attr("burger-id");
+            addCustomer(customerName, currentBurgerId);
+        }
     }
 
     function addCustomer(newCustomer, burgerId) {
         $.post("/addCustomer", newCustomer, function(customerData) {
             var burgerDevoured = {
                 id: parseInt(burgerId),
-                devoured: 1,
+                devoured: true,
                 CustomerId: customerData.id
             };
-            $.ajax({
-                method: "PUT",
-                url: "/devourBurger",
-                data: burgerDevoured
-            }).done(function() {
-                window.location.href = "/";
-            });
+            updateBurgerStatus(burgerDevoured);
         });
     }
 
-    getBurgers();
-    getDevourBurgers();
+    function updateBurgerStatus(burgerDevoured) {
+        $.ajax({
+            method: "PUT",
+            url: "/devourBurger",
+            data: burgerDevoured
+        }).done(function() {
+            window.location.href = "/";
+        });
+    }
+
+    getBurgersToDevour();
+    getDevouredBurgers();
     $("#add-burger").on("submit", addBurgerForm);
     $(document).on("click", "button.devour", burgerDevour);
 });

@@ -19,6 +19,10 @@ body {
     margin-top: 50px;
 }
 
+.warning {
+    color: #ff0198;
+}
+
 .burger-img {
     width: 150px;
 }

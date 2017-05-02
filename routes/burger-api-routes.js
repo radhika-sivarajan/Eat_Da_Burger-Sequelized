@@ -1,16 +1,20 @@
 var db = require("../models");
 
 module.exports = function(app) {
-    app.get("/burgerList", function(req, res) {
-        db.Burgers.findAll({}).then(function(dbGet) {
+    app.get("/burgerToDevour", function(req, res) {
+        db.Burgers.findAll({
+            where: {
+                devoured: false
+            }
+        }).then(function(dbGet) {
             res.json(dbGet);
         });
     });
 
-    app.get("/burgerDevourList", function(req, res) {
+    app.get("/burgerDevoured", function(req, res) {
         db.Burgers.findAll({
             where: {
-                devoured: 1
+                devoured: true
             },
             include: [db.Customers]
         }).then(function(dbGet) {

@@ -2,11 +2,14 @@ module.exports = function(sequelize, DataTypes) {
     var Burgers = sequelize.define("Burgers", {
         burgerName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
         },
         devoured: {
             type: DataTypes.BOOLEAN,
-            defaultValue: 0
+            defaultValue: false
         }
     }, {
         classMethods: {
