@@ -12,4 +12,17 @@ module.exports = function(app) {
             res.json(dbPost);
         });
     });
+
+    app.put("/devourBurger", function(req, res) {
+        db.Burgers.update({
+            devoured: req.body.devoured
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then(function(dbPost) {
+            res.json(dbPost);
+            console.log(dbPost);
+        });
+    });
 };
