@@ -1,34 +1,21 @@
 $(document).ready(function() {
-    function getBurgersToDevour() {
-        $.get("/burgerToDevour", function(data) {
+
+    function getBurgersList(routeName, className, devour) {
+        $.get(routeName, function(data) {
             burgersList = data;
             if (!burgersList || !burgersList.length) {
-                $(".burger-to-eat").html("<tr><td>No records...</td></tr>");
+                $(className).html("<tr><td>No records...</td></tr>");
             } else {
-                $(".burger-to-eat").empty();
-                var burgerToAdd = [];
+                $(className).empty();
+                var burgerArray = [];
                 for (var i = 0; i < burgersList.length; i++) {
-                    if (!burgersList[i].devoured) {
-                        burgerToAdd.push(burgerToDevourRow(burgersList[i]));
+                    if (!devour) {
+                        burgerArray.push(burgerToDevourRow(burgersList[i]));
+                    } else {
+                        burgerArray.push(burgerDevouredRow(burgersList[i]));
                     }
                 }
-                $(".burger-to-eat").append(burgerToAdd);
-            }
-        });
-    }
-
-    function getDevouredBurgers() {
-        $.get("/burgerDevoured", function(data) {
-            burgersList = data;
-            if (!burgersList || !burgersList.length) {
-                $(".burger-devoured").html("<tr><td>No records...</td></tr>");
-            } else {
-                $(".burger-devoured").empty();
-                var burgerDevoured = [];
-                for (var i = 0; i < burgersList.length; i++) {
-                    burgerDevoured.push(burgerDevouredRow(burgersList[i]));
-                }
-                $(".burger-devoured").append(burgerDevoured);
+                $(className).append(burgerArray);
             }
         });
     }
@@ -120,8 +107,8 @@ $(document).ready(function() {
         });
     }
 
-    getBurgersToDevour();
-    getDevouredBurgers();
+    getBurgersList("/burgerToDevour", ".burger-to-eat", false);
+    getBurgersList("/burgerDevoured", ".burger-devoured", true);
     $("#add-burger").on("submit", addBurgerForm);
     $(document).on("click", "button.devour", burgerDevour);
 });
