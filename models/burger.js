@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
                 Burgers.belongsTo(models.Customers, {
                     onDelete: "cascade",
                     foreignKey: {
-                        allowNull: false
+                        allowNull: true
                     }
                 });
             }
