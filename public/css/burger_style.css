@@ -23,6 +23,10 @@ body {
     color: #ff0198;
 }
 
+#customer-name {
+    font-size: 12px;
+}
+
 .burger-img {
     width: 150px;
 }

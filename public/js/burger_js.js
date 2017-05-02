@@ -41,7 +41,7 @@ $(document).ready(function() {
         var burgerName = $("<td>");
         burgerName.text(burger.burgerName);
         var customerColumn = $("<td>");
-        var customerName = $("<input type='text' id='customer-name'>");
+        var customerName = $("<input type='text' id='customer-name' placeholder='Customer name'>");
         var validator = $("<br><small class='form-text text-muted text-right warning'>");
         customerColumn.append(customerName).append(validator);
         var buttonColumn = $("<td>");
