@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // Display burger list according to the status devour
     function getBurgersList(routeName, className, devour) {
         $.get(routeName, function(data) {
             burgersList = data;
@@ -20,6 +21,7 @@ $(document).ready(function() {
         });
     }
 
+    // Function to create row for each burger along with the input field to enter customer name.
     function burgerToDevourRow(burger) {
         var newTableRow = $("<tr>");
         newTableRow.attr("burger-id", burger.id);
@@ -40,6 +42,7 @@ $(document).ready(function() {
         return newTableRow;
     }
 
+    // Function to create row for each burger along with the name of customer who devoured.
     function burgerDevouredRow(burger) {
         var newTableRow = $("<tr>");
         newTableRow.attr("burger-id", burger.id);
@@ -53,6 +56,7 @@ $(document).ready(function() {
         return newTableRow;
     }
 
+    // Function to get burger name from the form and validation.
     function addBurgerForm(event) {
         event.preventDefault();
         var burger = $("#burger-name").val().trim();
@@ -67,12 +71,14 @@ $(document).ready(function() {
         }
     }
 
+    // Function to post new burger details to database
     function submitPost(newBurger) {
         $.post("/addBurger", newBurger, function() {
             window.location.href = "/";
         });
     }
 
+    // Function to get burger id and customer name from the form and validation.
     function burgerDevour() {
         var customer = $(this).parent().prev().children().val().trim();
         if (customer == "") {
@@ -86,6 +92,7 @@ $(document).ready(function() {
         }
     }
 
+    // Adding new customer to db and getting the customer id
     function addCustomer(newCustomer, burgerId) {
         $.post("/addCustomer", newCustomer, function(customerData) {
             var burgerDevoured = {
@@ -97,6 +104,7 @@ $(document).ready(function() {
         });
     }
 
+    // Update burger status to the database
     function updateBurgerStatus(burgerDevoured) {
         $.ajax({
             method: "PUT",
@@ -107,8 +115,11 @@ $(document).ready(function() {
         });
     }
 
+    // Display burger list on page loading
     getBurgersList("/burgerToDevour", ".burger-to-eat", false);
     getBurgersList("/burgerDevoured", ".burger-devoured", true);
+
+    // Event handlers
     $("#add-burger").on("submit", addBurgerForm);
     $(document).on("click", "button.devour", burgerDevour);
 });
