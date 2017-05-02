@@ -1,6 +1,7 @@
 var db = require("../models");
 
 module.exports = function(app) {
+    // Select all burgers which are not devoured
     app.get("/burgerToDevour", function(req, res) {
         db.Burgers.findAll({
             where: {
@@ -11,6 +12,7 @@ module.exports = function(app) {
         });
     });
 
+    // Select all burgers which are devoured along with the customer details
     app.get("/burgerDevoured", function(req, res) {
         db.Burgers.findAll({
             where: {
@@ -22,12 +24,14 @@ module.exports = function(app) {
         });
     });
 
+    // Insert a new burger
     app.post("/addBurger", function(req, res) {
         db.Burgers.create(req.body).then(function(dbPost) {
             res.json(dbPost);
         });
     });
 
+    // Update the burger status
     app.put("/devourBurger", function(req, res) {
         db.Burgers.update({
             devoured: req.body.devoured,
@@ -42,6 +46,7 @@ module.exports = function(app) {
         });
     });
 
+    // Add a new customer
     app.post("/addCustomer", function(req, res) {
         db.Customers.create(req.body).then(function(dbPost) {
             res.json(dbPost);
